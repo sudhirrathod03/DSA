@@ -73,3 +73,35 @@ function removeDuplicates(arr){
   
 }
 removeDuplicates([1, 2, 2, 3, 4, 4, 5, 5])
+
+function sumClosest(arr, target)
+{
+    let n = arr.length;
+
+    let res = [];
+    let minDiff = Number.MAX_SAFE_INTEGER;
+
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = i + 1; j < n; j++) {
+
+            let currSum = arr[i] + arr[j];
+            let currDiff = Math.abs(currSum - target);
+            if (currDiff < minDiff) {
+                minDiff = currDiff;
+                res = [
+                    Math.min(arr[i], arr[j]),
+                    Math.max(arr[i], arr[j])
+                ];
+            }
+            else if (currDiff === minDiff
+                     && (res[1] - res[0])
+                            < Math.abs(arr[i] - arr[j])) {
+                res = [
+                    Math.min(arr[i], arr[j]),
+                    Math.max(arr[i], arr[j])
+                ];
+            }
+        }
+    }
+    return res;
+}
